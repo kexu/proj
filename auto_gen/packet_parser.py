@@ -14,7 +14,7 @@ elem = xml.etree.ElementTree.parse('packet_defines.xml').getroot()
 for packet in elem:
     packet_name   = packet.attrib.get('name')
     packet_length = int(packet.attrib.get('length'))
-    # Sanity check
+    # Sanity check: whether packet length is greater than 0 or not
     if packet_length <= 0:
         sys.exit("Error: Packet %s length is %d! Exit..." % (packet_name, packet_length))
 
@@ -28,19 +28,17 @@ for packet in elem:
         field_width         = int(field.attrib.get('width'))
         field_total_length  = field_total_length + field_width 
         field_type          = field.attrib.get('type')
-        # Sanity check
-        # Check whether field_width is greater than 0
+        # Sanity check: whether field_width is greater than 0
         if field_width <= 0:
             sys.exit("Error: Packet = %s, field = %s, width = %d! Exit..." % (packet_name, field_name, field_width)) 
-        # Check whether field_position and width match
+        # Sanity check: whether field_position and width match
         if field_width != field_position_msb - field_position_lsb + 1:
             sys.exit("Error: Packet = %s, field = %s, position %s and width %s mismatch! Exit..." % (packet_name, field_name, field_position, str(field_width)))
 
-    # Sanity check
-    # Check whether packet length equals summed field length
+    # Sanity check: whether packet length equals summed field length
     if field_total_length != packet_length:
         sys.exit("Error: packet = %s, packet length %d mismatches with summed field total length %d! Exit..." % (packet_name, packet_length, field_total_length))
-    # Check whether field definition completes
+    # Sanity check: whether field definition completes
     if field_position_lsb != 0:
         sys.exit("Error: packet = %s, last lsb = %d, packet definition is not complete! Exit..." % (packet_name, field_position_lsb))
 

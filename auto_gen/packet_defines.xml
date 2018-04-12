@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <definition>
     <packet name="pu2fu_ctrl" length="32">
-        <field name="aaa" position="[31:30]" width="2" type="uint" />
-        <field name="bbb" position="[29:29]" width="1" type="uint" />
+        <field name="aaa" position="[31:30]" width="2"  type="uint" />
+        <field name="bbb" position="[29:0]"  width="30" type="uint" />
     </packet>
     
     <packet name="pu2fu_data" length="32">
-        <field name="profile_idc" position="[31:28]" width="4" type="uint" />
+        <field name="profile_idc" position="[31:0]" width="32" type="uint" />
     </packet>
 </definition>
