@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<csr>
+	<module name="common">
+		<reg name="CSR_HW_VERSION" access="ro" width="32" offset="0x0000_0000" reset="0x1000_0000" description="hardware version register">
+			<field name="MAJOR_VERSION" position="[31:28]" 	width= "4" type="uint" reset="0x1" description="major version" />
+			<field name="MINOR_VERSION" position="[27:16]" 	width="12" type="uint" reset="0x0" description="minor version" />
+			<field name="STEP_VERSION" 	position="[15:0]"  	width="16" type="uint" reset="0x0" description="step version"  />
+		</reg>
+		<reg name="CSR_INT_STATUS" access="ro" width="32" offset="0x0000_0004" reset="0x0000_0000" description="hardware interrupt status">
+			<field name="RESERVED_31_6" position="[31:6]" 	width="26" 	type="uint" reset="0x0" description="Reserved bits" 		/>
+			<field name="SCL_INT" 		position="[5]" 		width="1" 	type="uint" reset="0x0" description="SCL module error interrupt"/>
+			<field name="CON_INT" 		position="[4]" 		width="1" 	type="uint" reset="0x0" description="CON module error interrupt"/>
+			<field name="EWP_INT" 		position="[3]" 		width="1" 	type="uint" reset="0x0" description="EWP module error interrupt"/>
+			<field name="PLU_INT" 		position="[2]" 		width="1" 	type="uint" reset="0x0" description="PLU module error interrupt"/>
+			<field name="CAP_INT" 		position="[1]" 		width="1" 	type="uint" reset="0x0" description="CAP module error interrupt"/>
+			<field name="DMA_INT" 		position="[0]"  	width="1" 	type="uint" reset="0x0" description="DMA module error interrupt"/>
+		</reg>
+		<reg name="CSR_INT_CLEAR" access="wo" width="32" offset="0x0000_0008" reset="0x0000_0000" description="hardware interrupt clear">
+			<field name="RESERVED_31_6" position="[31:6]" 	width="26" 	type="uint" reset="0x0" description="Reserved bits" 			/>
+			<field name="SCL_INT_CLEAR" position="[5]" 		width="1" 	type="uint" reset="0x0" description="SCL module interrupt clear"/>
+			<field name="CON_INT_CLEAR" position="[4]" 		width="1" 	type="uint" reset="0x0" description="CON module interrupt clear"/>
+			<field name="EWP_INT_CLEAR" position="[3]" 		width="1" 	type="uint" reset="0x0" description="EWP module interrupt clear"/>
+			<field name="PLU_INT_CLEAR" position="[2]" 		width="1" 	type="uint" reset="0x0" description="PLU module interrupt clear"/>
+			<field name="CAP_INT_CLEAR" position="[1]" 		width="1" 	type="uint" reset="0x0" description="CAP module interrupt clear"/>
+			<field name="DMA_INT_CLEAR" position="[0]"  		width="1" 	type="uint" reset="0x0" description="DMA module interrupt clear"/>
+		</reg>
+		<reg name="CSR_CFG" access="rw" width="32" offset="0x0000_000A" reset="0x0000_0000" description="hardware configurations">
+			<field name="RESERVED_31_18"	position="[31:2]" 	width="30" 	type="uint" reset="0x0" description="Reserved bits" 				/>
+			<field name="BWC_EN" 			position="[1]" 		width="1" 	type="uint" reset="0x0" description="bandwidth compression enable"	/>
+			<field name="SINGLE_LAYER_EN" 	position="[0]" 		width="1" 	type="uint" reset="0x0" description="single layer process enable"	/>
+		</reg>	
+		<reg name="CSR_LAYER_CFG" access="rw" width="32" offset="0x0000_000A" reset="0x0000_0000" description="hardware configurations">	
+			<field name="CURR_LAYER_ID" 	position="[31:16]" 	width="16" 	type="uint" reset="0x0" description="current layer id"	/>
+			<field name="TOTAL_LAYER_NUM" 	position="[15:0]" 	width="16" 	type="uint" reset="0x0" description="total number of layers to be processed"	/>
+		</reg>
+		<reg name="CSR_CTRL_CMD_ADDR_REG0" access="rw" width="32" offset="0x0000_000A" reset="0x0000_0000" description="control command address LSB">
+			<field name="LSB"	position="[31:0]" 	width="32" 	type="uint" reset="0x0" description="64bit address LSB 32"	/>
+		</reg>
+		<reg name="CSR_CTRL_CMD_ADDR_REG1" access="rw" width="32" offset="0x0000_000A" reset="0x0000_0000" description="control command address MSB">
+			<field name="MSB"	position="[31:0]" 	width="32" 	type="uint" reset="0x0" description="64bit address MSB 32"	/>
+		</reg>
+		<reg name="CSR_PIC_SIZE" access="rw" width="32" offset="0x0000_000A" reset="0x0000_0000" description="input picture size">
+			<field name="WIDTH" 	position="[31:16]" 	width="16" 	type="uint" reset="0x0" description="input picture width"	/>
+			<field name="HEIGHT" 	position="[15:0]" 	width="16" 	type="uint" reset="0x0" description="input picture height"	/>
+		</reg>
+		<reg name="CSR_IF_MAP_CFG" access="rw" width="32" offset="0x0000_000A" reset="0x0000_0000" description="input feature map configuration">
+			<field name="RESERVED_31_4" position="[31:4]" 	width="28" 	type="uint" reset="0x0" description="reserved"					/>
+			<field name="BIT_DEPTH"		position="[3:2]" 	width="2" 	type="uint" reset="0x0" description="feature map bit depth"		/>
+			<field name="LAYOUT" 		position="[1:0]" 	width="2" 	type="uint" reset="0x0" description="feature map layout format"	/>
+		</reg>
+		<reg name="CSR_KERNEL_CFG" access="rw" width="32" offset="0x0000_000A" reset="0x0000_0000" description="kernel size configuration">
+			<field name="RESERVED_31_4" position="[31:4]" 	width="28" 	type="uint" reset="0x0" description="reserved"					/>
+			<field name="SIZE" 			position="[3:0]" 	width="4" 	type="uint" reset="0x0" description="kernel size in direction"	/>
+		</reg>
+		<reg name="CSR_I_CHANNEL_CFG" access="rw" width="32" offset="0x0000_000A" reset="0x0000_0000" description="input channel number for current layer">
+			<field name="TOTAL_CHANNEL_NUMBER"	position="[31:0]" 	width="32" 	type="uint" reset="0x0" description="total input channel number"/>
+		</reg>
+		<reg name="CSR_O_CHANNEL_CFG" access="rw" width="32" offset="0x0000_000A" reset="0x0000_0000" description="output channel number for current layer">
+			<field name="TOTAL_CHANNEL_NUMBER"	position="[31:0]" 	width="32" 	type="uint" reset="0x0" description="total output channel number"/>
+		</reg>
+		<reg name="CSR_IF_MAP_ADDR_REG0" access="rw" width="32" offset="0x0000_000A" reset="0x0000_0000" description="input feature map address LSB">
+			<field name="LSB"	position="[31:0]" 	width="32" 	type="uint" reset="0x0" description="64bit address LSB 32"	/>
+		</reg>
+		<reg name="CSR_IF_MAP_ADDR_REG1" access="rw" width="32" offset="0x0000_000A" reset="0x0000_0000" description="input feature map address MSB">
+			<field name="MSB"	position="[31:0]" 	width="32" 	type="uint" reset="0x0" description="64bit address MSB 32"	/>
+		</reg>
+		<reg name="CSR_OF_MAP_ADDR_REG0" access="rw" width="32" offset="0x0000_000A" reset="0x0000_0000" description="output feature map address LSB">
+			<field name="LSB"	position="[31:0]" 	width="32" 	type="uint" reset="0x0" description="64bit address LSB 32"	/>
+		</reg>
+		<reg name="CSR_OF_MAP_ADDR_REG1" access="rw" width="32" offset="0x0000_000A" reset="0x0000_0000" description="output feature map address MSB">
+			<field name="MSB"	position="[31:0]" 	width="32" 	type="uint" reset="0x0" description="64bit address MSB 32"	/>
+		</reg>
+		<reg name="CSR_WEIGHT_ADDR_REG0" access="rw" width="32" offset="0x0000_000A" reset="0x0000_0000" description="weight address LSB">
+			<field name="LSB"	position="[31:0]" 	width="32" 	type="uint" reset="0x0" description="64bit address LSB 32"	/>
+		</reg>
+		<reg name="CSR_WEIGHT_ADDR_REG1" access="rw" width="32" offset="0x0000_000A" reset="0x0000_0000" description="weight address MSB">
+			<field name="MSB"	position="[31:0]" 	width="32" 	type="uint" reset="0x0" description="64bit address MSB 32"	/>
+		</reg>
+		<reg name="CSR_BIAS_ADDR_REG0" access="rw" width="32" offset="0x0000_000A" reset="0x0000_0000" description="bias address LSB">
+			<field name="LSB"	position="[31:0]" 	width="32" 	type="uint" reset="0x0" description="64bit address LSB 32"	/>
+		</reg>
+		<reg name="CSR_BIAS_ADDR_REG1" access="rw" width="32" offset="0x0000_000A" reset="0x0000_0000" description="bias address MSB">
+			<field name="MSB"	position="[31:0]" 	width="32" 	type="uint" reset="0x0" description="64bit address MSB 32"	/>
+		</reg>
+		<reg name="CSR_POOLING_CFG" access="rw" width="32" offset="0x0000_000A" reset="0x0000_0000" description="current layer pooling configuration">
+			<field name="RESERVED_31_7" 	position="[31:7]" 	width="25" 	type="uint" reset="0x0" description="reserved"			/>
+			<field name="POOLING_STRIDE" 	position="[6:3]" 	width="4" 	type="uint" reset="0x0" description="pooling stride"	/>
+			<field name="POOLING_MODE"		position="[2:1]"	width="2" 	type="uint" reset="0x0" description="pooling mode"		/>
+			<field name="POOLING_EN" 		position="[0]"		width="1" 	type="uint" reset="0x0" description="pooling enable"	/>
+		</reg>
+		<reg name="CSR_ACTIVATION_CFG" access="rw" width="32" offset="0x0000_000A" reset="0x0000_0000" description="current layer activation configuration">
+			<field name="RESERVED_31_5"		position="[31:5]" 	width="27" 	type="uint" reset="0x0" description="reserved"			/>
+			<field name="ACTIVATION_MODE"	position="[4:1]"	width="4" 	type="uint" reset="0x0" description="activation mode"	/>
+			<field name="ACTIVATION_EN" 	position="[0]"		width="1" 	type="uint" reset="0x0" description="activation enable"	/>
+		</reg>
+		<reg name="CSR_UPSAMPLE_CFG" access="rw" width="32" offset="0x0000_000A" reset="0x0000_0000" description="current layer upsample configuration">
+			<field name="RESERVED_31_5"	position="[31:5]" 	width="27" 	type="uint" reset="0x0" description="reserved"			/>
+			<field name="UPSAMPLE_MODE"	position="[4:1]"	width="4" 	type="uint" reset="0x0" description="upsample mode"		/>
+			<field name="UPSAMPLE_EN" 	position="[0]"		width="1" 	type="uint" reset="0x0" description="upsample enable"	/>
+		</reg>
+		<reg name="CSR_STITCHING_CFG" access="rw" width="32" offset="0x0000_000A" reset="0x0000_0000" description="current layer stitching configuration">
+			<field name="RESERVED_31_17"	position="[31:17]" 	width="15" 	type="uint" reset="0x0" description="reserved"			/>
+			<field name="STITCHING_STRIDE"	position="[16:1]"	width="16" 	type="uint" reset="0x0" description="stitching stride"	/>
+			<field name="STITCHING_EN" 		position="[0]"		width="1" 	type="uint" reset="0x0" description="stitching enable"	/>
+		</reg>
+	</module>
+	<module name="scl">
+	</module>
+	<module name="con">
+	</module>
+	<module name="ewp">
+	</module>
+	<module name="plu">
+	</module>
+	<module name="cap">
+	</module>
+	<module name="dma">
+	</module>
+</csr>

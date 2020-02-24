@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<venus_interface>
+	<module name="top">
+		<interface name="dma2con_if_map" width="432" type="array"> <!-- type can only be array or flat -->
+			<field name="array" z_dim="1" y_dim="3" x_dim="18" width="8" type="int" />
+		</interface>
+		<interface name="dma2con_weight" width="2304" type="array">
+			<field name="array" z_dim="32" y_dim="3" x_dim="3" width="8" type="int" />
+		</interface>
+	</module>
+</venus_interface>
